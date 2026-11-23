@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html manifest="700.manifest">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PS4 Auto JB (Supported FW: 5.05~14.02) - Ver 1.0</title>
+<style>
+html,
+body {
+    background-image: url('img.jpg');
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: "Segoe UI", sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    background-color: #24272b;
+    color: white;
+    text-align: center;
+    width: 100%;
+    position: relative;
+}
+
+#clock {
+    margin: 0;
+}
+
+#clock,
+#date {
+    white-space: nowrap;
+    padding: 6px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.28);
+    font-weight: bold;
+    font-size: 14px;
+    color: white;
+    font-family: Almendra Display;
+    font-style: italic;
+}
+
+.header-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    box-sizing: border-box;
+    gap: 10px;
+    padding: 16px 20px 8px;
+}
+
+.hue {
+    background: linear-gradient(135deg, #ffffff 0%, #7de7ff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    padding: 10px;
+    border-radius: 10px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9);
+}
+
+.spinner {
+    position: absolute;
+    left: 50%;
+    top: calc(50% + 100px);
+    margin: -50px 0 0 -50px;
+    border: 10px solid #123b52;
+    border-radius: 50%;
+    border-top: 10px solid #7de7ff;
+    border-right: 10px solid #ffffff;
+    border-bottom: 10px solid #32c5d9;
+    border-left: 10px solid #7de7ff;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+h1 {
+    text-shadow: 4px 4px 4px black;
+    font-size: 16px;
+    color: white;
+    font-family: Almendra Display;
+    font-style: italic;
+    font-weight: bold;
+    text-align: center;
+}
+
+.page-title {
+    margin: 0 auto;
+    font-size: clamp(14px, 2.2vw, 22px);
+    letter-spacing: 0;
+    white-space: nowrap;
+}
+
+hr {
+    width: min(680px, 88%);
+    border: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.loading-message {
+    position: fixed;
+    bottom: 86px;
+    left: 50%;
+    right: auto;
+    width: max-content;
+    max-width: calc(100% - 32px);
+    transform: translateX(-50%);
+    margin: 0 !important;
+    box-sizing: border-box;
+    padding: 4px 12px;
+    font-size: 14px !important;
+    line-height: 1.35;
+    font-family: Georgia, serif;
+    font-style: italic;
+    font-weight: bold;
+    border: 1px solid rgba(125, 231, 255, 0.55);
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.78);
+    -webkit-background-clip: border-box;
+    background-clip: border-box;
+    color: #b8f5ff;
+    text-shadow: 0 0 5px rgba(125, 231, 255, 0.65), 1px 1px 3px rgba(0, 0, 0, 0.95);
+    box-shadow: 0 0 10px rgba(125, 231, 255, 0.32);
+    animation: loading-pulse 2s ease-in-out infinite;
+}
+
+.warning {
+    display: block;
+    width: min(900px, 92%);
+    margin: 0 auto;
+    padding: 8px 14px;
+    box-sizing: border-box;
+    border: 1px solid rgba(255, 153, 51, 0.55);
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.3);
+    color: #800000;
+    font: italic 14px "Segoe UI", sans-serif;
+}
+
+.credits {
+    position: fixed;
+    left: 50%;
+    bottom: 14px;
+    z-index: 5;
+    transform: translateX(-50%);
+    width: min(360px, calc(100% - 32px));
+    box-sizing: border-box;
+    padding: 8px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.32);
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.42);
+    color: white;
+    font: italic 12px/1.7 "Almendra Display", serif;
+    text-shadow: 2px 2px 4px black;
+    backdrop-filter: blur(5px);
+}
+
+.credits-title {
+    color: #ff9933 !important;
+    font-size: 12px;
+    font-weight: bold;
+    font-family: Almendra Display, serif;
+}
+
+.credits-author {
+    color: #138808 !important;
+    font-size: 12px;
+    font-style: italic;
+    font-weight: bold;
+    font-family: Almendra Display, serif;
+}
+
+@keyframes loading-pulse {
+    0%, 100% { opacity: 0.78; }
+    50% { opacity: 1; }
+}
+
+@media (max-width: 520px) {
+    .header-meta { gap: 4px; padding: 10px 6px 6px; }
+    #date, #clock { padding: 4px 6px; font-size: 10px; }
+    .page-title { font-size: 11px; }
+    .loading-message { bottom: 88px; padding: 4px 8px; font-size: 13px !important; }
+}
+
+@media (max-height: 600px) {
+    .spinner { top: 43%; }
+}
+</style>
+</head>
+<body>
+<script>
+window.msgs = document.getElementById('msgs');
+if (window.msgs) {
+    window.msgs.innerHTML = 'Starting Cache Installation...';
+}
+history.replaceState(null,null,'index.html');var histlength=history.length;history.go(-histlength);
+function DLProgress(e){Percent=(Math.round(e.loaded / e.total * 100));window.msgs.innerHTML="Installing Offline Cache: " + Percent + "%";}
+function DisplayCacheProgress(){window.msgs.innerHTML="Cache Installed Successfully ✔";setTimeout(function(){window.msgs.innerHTML="Now Close And Re-Open Your Browser ...";},1500);}
+window.applicationCache.addEventListener("progress",DLProgress,false);
+window.applicationCache.oncached=function(e){DisplayCacheProgress();};
+window.applicationCache.onupdateready=function(e){DisplayCacheProgress();};
+window.applicationCache.onerror=function(e){window.msgs.innerHTML="Error Installing Cache! - Clear and Re-Open Your Browser ...";};
+function updateDateTime() {
+    var now = new Date();
+    var day = String(now.getDate()).padStart(2, '0');
+    var month = String(now.getMonth() + 1).padStart(2, '0');
+    var year = now.getFullYear();
+    var hours = String(now.getHours()).padStart(2, '0');
+    var minutes = String(now.getMinutes()).padStart(2, '0');
+    var seconds = String(now.getSeconds()).padStart(2, '0');
+    var dateElement = document.getElementById('date');
+    var clockElement = document.getElementById('clock');
+    if (dateElement && clockElement) {
+        dateElement.textContent = day + '/' + month + '/' + year;
+        clockElement.textContent = hours + ':' + minutes + ':' + seconds;
+    }
+}
+document.addEventListener('DOMContentLoaded', function () {
+    window.msgs = document.getElementById('msgs');
+    if (window.msgs) window.msgs.innerHTML = 'Starting Cache Installation...';
+});
+</script>
+<header>
+<div class="header-meta"><span id="date"></span><h1 class="page-title">PS4 Auto JB (Supported FW: 5.05~14.02) - Ver 1.0</h1><span id="clock"></span></div>
+<hr>
+</header>
+<marquee class="warning">"Once you have enabled debug settings, do not ever go into *Debug Settings - System - IDU Mode, or your PS4 will brick!"</marquee>
+<h1 id="msgs" class="loading-message hue">Starting Cache Installation...</h1>
+<div id="spinner" class="spinner">
+    <p class="hue">PSJ</p>
+</div>
+<div class="credits">
+    <span class="credits-title">Designed &amp; Compiled by : Games_World (Hosur)</span><br>
+    <span class="credits-author">Credits : PSJ_L</span>
+</div>
+<script>
+updateDateTime();
+setInterval(updateDateTime, 1000);
+</script>
+</body>
+</html>

@@ -1,0 +1,277 @@
+html,
+body {
+    background-image: url('img.jpg');
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: "Segoe UI", sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    background-color: #24272b;
+    color: white;
+    text-align: center;
+    width: 100%;
+    position: relative;
+}
+
+body {
+    box-sizing: border-box;
+    padding: 24px 16px;
+}
+
+#date,
+#clock {
+    white-space: nowrap;
+    padding: 6px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.28);
+    font-weight: bold;
+    font-size: 14px;
+    color: white;
+    font-family: Almendra Display, serif;
+    font-style: italic;
+}
+
+.header-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    box-sizing: border-box;
+    gap: 10px;
+    padding: 0 4px 8px;
+}
+
+.page-title {
+    margin: 8px auto 12px;
+    font-family: Almendra Display, serif;
+    font-size: clamp(18px, 3vw, 28px);
+    font-style: italic;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: 4px 4px 4px black;
+}
+
+hr {
+    width: min(680px, 88%);
+    border: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.loading-message {
+    position: fixed;
+    top: 50%;
+    left: 16px;
+    right: 16px;
+    margin: 0 !important;
+    transform: translateY(-50%);
+    font-family: Georgia, serif;
+    font-size: clamp(18px, 4vw, 30px) !important;
+    font-style: italic;
+    font-weight: bold;
+    background: linear-gradient(90deg, #ff9933 0%, #ffffff 50%, #138808 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-align: center;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.85);
+}
+
+.loading-message.hue {
+    padding: 0;
+    border-radius: 0;
+    background: linear-gradient(135deg, #ffffff 0%, #7de7ff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.warning {
+    display: block;
+    width: min(900px, 92%);
+    margin: 0 auto;
+    padding: 8px 14px;
+    box-sizing: border-box;
+    border: 1px solid rgba(255, 153, 51, 0.55);
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.3);
+    color: #800000;
+    font: italic 14px "Segoe UI", sans-serif;
+}
+
+.credits {
+    position: fixed;
+    left: 50%;
+    bottom: 14px;
+    z-index: 5;
+    transform: translateX(-50%);
+    width: min(360px, calc(100% - 32px));
+    box-sizing: border-box;
+    padding: 8px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.32);
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.42);
+    color: white;
+    font: italic 12px/1.7 "Almendra Display", serif;
+    text-align: center;
+    text-shadow: 2px 2px 4px black;
+}
+
+.credits-title {
+    color: #ff9933;
+    font-size: 12px;
+    font-weight: bold;
+    font-family: Almendra Display, serif;
+}
+
+.credits-author {
+    color: #138808;
+    font-size: 12px;
+    font-style: italic;
+    font-weight: bold;
+    font-family: Almendra Display, serif;
+}
+
+.spinner {
+    position: fixed;
+    left: 50%;
+    top: calc(50% + 100px);
+    width: 80px;
+    height: 80px;
+    margin: -50px 0 0 -50px;
+    border: 10px solid #123b52;
+    border-top: 10px solid #7de7ff;
+    border-right: 10px solid #ffffff;
+    border-bottom: 10px solid #32c5d9;
+    border-left: 10px solid #7de7ff;
+    border-radius: 50%;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@media (max-width: 520px) {
+    body {
+        padding: 12px 6px;
+    }
+
+    .header-meta {
+        gap: 4px;
+        padding: 0 0 6px;
+    }
+
+    #date,
+    #clock {
+        padding: 4px 6px;
+        font-size: 10px;
+    }
+
+    .page-title {
+        font-size: 11px;
+        white-space: nowrap;
+    }
+}
+
+.info {
+    overflow: hidden;
+    position: absolute;
+    top: 150%;
+    left: 50%;
+    font-size: 15px;
+    color: white;
+    font-family: Almendra Display;
+    transform: translate(-50%, -50%);
+}
+
+#clock {
+    float: right;
+    margin-right: 2.25%;
+    margin-top: 5px;
+    font-weight: bold;
+    font-size: 16px;
+    color: white;
+    font-family: Almendra Display;
+    font-style: italic;
+}
+
+#date {
+    float: left;
+    margin-left: 1.25%;
+    margin-top: 5px;
+    font-weight: bold;
+    font-size: 16px;
+    color: white;
+    font-family: Almendra Display;
+    font-style: italic;
+}
+
+.hue {
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    animation: hue 5s linear infinite;
+    -webkit-animation: hue 5s linear infinite;
+    box-shadow: 0 0 50px yellow;
+    background: rgba(255, 255, 0, 0.4);
+}
+
+.hue:hover {
+    color: yellow;
+    background: transparent;
+}
+
+@keyframes hue {
+    0% {
+        filter: hue-rotate(0deg);
+    }
+
+    10% {
+        box-shadow: 0 1px 50px yellow;
+    }
+
+    20% {
+        box-shadow: 1px 1px 50px yellow;
+    }
+
+    30% {
+        box-shadow: 1px 0 50px yellow;
+    }
+
+    40% {
+        box-shadow: 1px -1px 50px yellow;
+    }
+
+    50% {
+        box-shadow: 0 -1px 50px yellow;
+    }
+
+    60% {
+        box-shadow: -1px -1px 50px yellow;
+    }
+
+    70% {
+        box-shadow: -1px 0 50px yellow;
+    }
+
+    80% {
+        box-shadow: -1px 1px 50px yellow;
+    }
+
+    90% {
+        box-shadow: 0 1px 50px yellow;
+    }
+
+    100% {
+        filter: hue-rotate(360deg);
+    }
+}

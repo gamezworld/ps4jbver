@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>PS4 Auto JB (Supported FW: 5.05~14.02) - Ver 1.0</title>
+<style>
+html,
+body {
+    background-image: url('img.jpg');
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: "Segoe UI", sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    background-color: #24272b;
+    color: white;
+    text-align: center;
+    width: 100%;
+    position: relative;
+}
+
+.info {
+    overflow: hidden;
+    position: absolute;
+    top: 150%;
+    left: 50%;
+    font-size: 15px;
+    color: white;
+    font-family: Almendra Display;
+    transform: translate(-50%, -50%);
+}
+
+#clock {
+    margin: 0;
+}
+
+#clock,
+#date {
+    white-space: nowrap;
+    padding: 6px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.28);
+    font-weight: bold;
+    font-size: 14px;
+    color: white;
+    font-family: Almendra Display;
+    font-style: italic;
+}
+
+#date {
+    margin: 0;
+}
+
+.header-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    box-sizing: border-box;
+    gap: 10px;
+    padding: 16px 20px 8px;
+}
+
+.hue {
+    background: linear-gradient(135deg, #ffffff 0%, #7de7ff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    padding: 10px;
+    border-radius: 10px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9);
+}
+
+.spinner .hue {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.hue:hover {
+    background: linear-gradient(135deg, #ffffff 0%, #7de7ff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+.spinner {
+    position: absolute;
+    left: 50%;
+    top: calc(50% + 100px);
+    margin: -50px 0 0 -50px;
+    border: 10px solid #123b52;
+    border-radius: 50%;
+    border-top: 10px solid #7de7ff;
+    border-right: 10px solid #ffffff;
+    border-bottom: 10px solid #32c5d9;
+    border-left: 10px solid #7de7ff;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+h1 {
+    text-shadow: 4px 4px 4px black;
+    font-size: 16px;
+    color: white;
+    font-family: Almendra Display;
+    font-style: italic;
+    font-weight: bold;
+    text-align: center;
+}
+
+.page-title {
+    margin: 0 auto;
+    font-size: clamp(14px, 2.2vw, 22px);
+    letter-spacing: 0;
+    white-space: nowrap;
+}
+
+hr {
+    width: min(680px, 88%);
+    border: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.loading-message {
+    position: fixed;
+    bottom: 86px;
+    left: 16px;
+    right: 16px;
+    margin: 0 !important;
+    font-size: 14px !important;
+    font-family: Georgia, serif;
+    font-style: italic;
+    font-weight: bold;
+    background: linear-gradient(90deg, #ff9933 0%, #ffffff 50%, #138808 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.85);
+    animation: loading-pulse 2s ease-in-out infinite;
+}
+
+.loading-message.hue {
+    padding: 0;
+    border-radius: 0;
+    background: linear-gradient(135deg, #ffffff 0%, #7de7ff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.warning {
+    display: block;
+    width: min(900px, 92%);
+    margin: 0 auto;
+    padding: 8px 14px;
+    box-sizing: border-box;
+    border: 1px solid rgba(255, 153, 51, 0.55);
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.3);
+    color: #800000;
+    font: italic 14px "Segoe UI", sans-serif;
+}
+
+.credits {
+    position: fixed;
+    left: 50%;
+    bottom: 14px;
+    z-index: 5;
+    transform: translateX(-50%);
+    width: min(360px, calc(100% - 32px));
+    box-sizing: border-box;
+    padding: 8px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.32);
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.42);
+    color: white;
+    font: italic 12px/1.7 "Almendra Display", serif;
+    text-shadow: 2px 2px 4px black;
+    backdrop-filter: blur(5px);
+}
+
+.credits-title {
+    color: #ff9933 !important;
+    font-size: 12px;
+    font-weight: bold;
+    font-family: Almendra Display, serif;
+}
+
+.credits-author {
+    color: #138808 !important;
+    font-size: 12px;
+    font-style: italic;
+    font-weight: bold;
+    font-family: Almendra Display, serif;
+}
+
+@keyframes loading-pulse {
+    0%,
+    100% {
+        opacity: 0.78;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+@media (max-width: 520px) {
+    .header-meta {
+        gap: 4px;
+        padding: 10px 6px 6px;
+    }
+
+    #date,
+    #clock {
+        padding: 4px 6px;
+        font-size: 10px;
+    }
+
+    .page-title {
+        font-size: 11px;
+    }
+}
+
+a {
+    text-decoration: none;
+}
+
+#progress,
+#menu {
+    display: block;
+}
+
+#crypto,
+#tools,
+#lnx,
+#mods {
+    display: none;
+}
+
+.btn {
+    background-color: #003263;
+    color: white;
+    width: 227px;
+    height: 46px;
+    padding-bottom: 5px;
+    text-align: center;
+    font-size: 20px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    margin-left: 5px;
+    margin-right: 5px;
+    border-style: none;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.btn:hover {
+    background-color: #0069d9;
+}
+
+.btn-onln {
+    background-color: #076300;
+}
+
+.btn-onln:hover {
+    background-color: #18891b;
+}
+
+.btn-toolbox {
+    background-color: #ae2301;
+}
+
+.btn-toolbox:hover {
+    background-color: #d42a01;
+}
+
+.btn-multi {
+    background-color: #b8860b;
+}
+
+.btn-multi:hover {
+    background-color: #daa520;
+}
+</style>
+</head>
+<body>
+<script>
+var uaFull = navigator.userAgent;
+var match = uaFull.match(/PlayStation 4[ /]([\d.]+)/i);
+var isPS4 = match !== null;
+var fwVersion = isPS4 ? match[1] : "Unknown";
+var fwNum = parseFloat(fwVersion);
+
+function onScriptError() {
+    msgs.innerHTML = "Content not Found! - Clear Browser Data and Re-Install Cache ...";
+}
+
+function updateDateTime() {
+    var now = new Date();
+    var day = String(now.getDate()).padStart(2, '0');
+    var month = String(now.getMonth() + 1).padStart(2, '0');
+    var year = now.getFullYear();
+    var hours = String(now.getHours()).padStart(2, '0');
+    var minutes = String(now.getMinutes()).padStart(2, '0');
+    var seconds = String(now.getSeconds()).padStart(2, '0');
+    var dateElement = document.getElementById('date');
+    var clockElement = document.getElementById('clock');
+
+    if (dateElement && clockElement) {
+        dateElement.textContent = day + '/' + month + '/' + year;
+        clockElement.textContent = hours + ':' + minutes + ':' + seconds;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    updateDateTime();
+    setInterval(updateDateTime, 1000);
+});
+
+if (isPS4) {
+    if (window.applicationCache.status == '0') {
+        if (fwNum == 5.05 || fwNum == 5.07) {
+            window.location.replace("cache505.html");
+        } else if (fwNum >= 7.00 && fwNum <= 8.52) {
+            window.location.replace("cache700.html");
+        } else if (fwNum >= 9.00 && fwNum <= 9.60) {
+            window.location.replace("cache900.html");
+        } else if (fwNum >= 10.00 && fwNum <= 11.02) {
+            window.location.replace("cachecss.html");
+        } else if (fwNum >= 11.50 && fwNum <= 14.02) {
+            window.location.replace("cacheslopkit.html");
+        } else {
+            document.addEventListener("DOMContentLoaded", () => {
+                msgs.innerHTML = 'Unsupported Firmware: <span style="color: red;">' + fwVersion + '</span>';
+            });
+        }
+    } else {
+        if (fwNum == 5.05 || fwNum == 5.07) {
+            var script = document.createElement('script');
+            script.src = "505/exploit.js";
+            script.onerror = onScriptError;
+            document.head.appendChild(script);
+        }
+        else if (fwNum >= 7.00 && fwNum <= 8.52) {
+            var script = document.createElement('script');
+            script.type = 'module';
+            script.src = "700/alert.js";
+            script.onerror = onScriptError;
+            document.head.appendChild(script);
+        }
+        else if (fwNum >= 9.00 && fwNum <= 9.60) {
+            var script = document.createElement('script');
+            script.type = 'module';
+            script.src = "900/alert.js";
+            script.onerror = onScriptError;
+            document.head.appendChild(script);
+        }
+        else if (fwNum >= 10.00 && fwNum <= 11.02) {
+            var script = document.createElement('script');
+            script.src = "css/main.js";
+            script.onerror = onScriptError;
+            script.onload = function () {
+                setTimeout(function () {
+                    doJb();
+                }, 500);
+            };
+            document.head.appendChild(script);
+        }
+        else if (fwNum >= 11.50 && fwNum <= 12.02) {
+            var script = document.createElement('script');
+            script.type = 'module';
+            script.src = "slopkit/chain_lapse.js";
+            script.onerror = onScriptError;
+            document.head.appendChild(script);
+        }
+        else if (fwNum >= 12.50 && fwNum <= 13.00) {
+            var script = document.createElement('script');
+            script.type = 'module';
+            script.src = "slopkit/chain_poops.js";
+            script.onerror = onScriptError;
+            document.head.appendChild(script);
+        }
+        else if (fwNum >= 13.02 && fwNum <= 13.52) {
+            var script = document.createElement('script');
+            script.type = 'module';
+            script.src = "slopkit/jb.js?v=19";
+            script.onerror = onScriptError;
+            document.head.appendChild(script);
+        }
+        else if (fwNum == 14.00 || fwNum == 14.02) {
+            var script = document.createElement('script');
+            script.type = 'module';
+            script.src = "slopkit/jb2.js";
+            script.onerror = onScriptError;
+            document.head.appendChild(script);
+        }
+    }
+}
+</script>
+<header>
+<div class="header-meta"><span id="date"></span><h1 class="page-title">PS4 Auto JB (Supported FW: 5.05~14.02) - Ver 1.0</h1><span id="clock"></span></div>
+<hr>
+</header>
+<marquee class="warning">"Once you have enabled debug settings, do not ever go into *Debug Settings - System - IDU Mode, or your PS4 will brick!"</marquee>
+<h1 id="msgs" class="loading-message hue">......Loading G0ld3nH3n ......<br>Please Wait</h1>
+<div id="spinner" class="spinner">
+    <p class="hue">PSJ</p>
+</div>
+<div class="credits">
+    <span class="credits-title">Designed &amp; Compiled by : Games_World (Hosur)</span><br>
+    <span class="credits-author">Credits : PSJ_L</span>
+</div>
+</body>
+</html>
+
